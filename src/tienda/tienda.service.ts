@@ -32,7 +32,9 @@ export class TiendaService {
         if (!persistedTienda)
           throw new BusinessLogicException("La tienda con el id dado no ha sido encontrada", BusinessError.NOT_FOUND);
         
-        return await this.tiendaRepository.save({...persistedTienda, ...tienda);
+        tienda.id = id;
+
+        return await this.tiendaRepository.save(tienda);
     }
 
     async delete(id: string) {
