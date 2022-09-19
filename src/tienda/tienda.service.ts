@@ -22,4 +22,8 @@ export class TiendaService {
    
         return tienda;
     }
+
+    async create(tienda: TiendaEntity): Promise<TiendaEntity> {
+        return await this.tiendaRepository.save(tienda);
+    }
 }
