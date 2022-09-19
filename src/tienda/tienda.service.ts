@@ -26,4 +26,12 @@ export class TiendaService {
     async create(tienda: TiendaEntity): Promise<TiendaEntity> {
         return await this.tiendaRepository.save(tienda);
     }
+
+    async update(id: string, tienda: TiendaEntity): Promise<TiendaEntity> {
+        const persistedTienda: TiendaEntity = await this.tiendaRepository.findOne({where:{id}});
+        if (!persistedTienda)
+          throw new BusinessLogicException("La tienda con el id dado no ha sido encontrada", BusinessError.NOT_FOUND);
+        
+        return await this.tiendaRepository.save({...persistedTienda, ...tienda);
+    }
 }
