@@ -34,4 +34,12 @@ export class TiendaService {
         
         return await this.tiendaRepository.save({...persistedTienda, ...tienda);
     }
+
+    async delete(id: string) {
+        const tienda: TiendaEntity = await this.tiendaRepository.findOne({where:{id}});
+        if (!tienda)
+          throw new BusinessLogicException("La tienda con el id dado no ha sido encontrada", BusinessError.NOT_FOUND);
+     
+        await this.tiendaRepository.remove(tienda);
+    }
 }
