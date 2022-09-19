@@ -9,4 +9,9 @@ export class TiendaService {
         @InjectRepository(TiendaEntity)
         private readonly tiendaRepository: Repository<TiendaEntity>
     ){}
+
+    async findAll(): Promise<TiendaEntity[]> {
+        return await this.tiendaRepository.find({ relations: ["productos"] });
+    }
+
 }
